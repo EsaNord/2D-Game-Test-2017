@@ -1,43 +1,40 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceShooter
 {
 
-    public class PlayerSpaceship : MonoBehaviour
+    public class PlayerSpaceship : SpaceShipBase
     {
-        public float speed = 1.5f;
+        
+        public const string horizontalAxis = "Horizontal";
+        public const string verticalAxis = "Vertical";
+        public const string fireButtonName = "Fire1";
 
-        // Update is called once per frame
-        void Update()
-        {
-            Vector3 movementVector = GetMovementVector();
-            transform.Translate(movementVector * speed * Time.deltaTime);
+        protected override void Move()
+        {            
+            Vector3 movementVector = GetInputVector();
+            transform.Translate(movementVector * Speed * Time.deltaTime);
         }
 
-        private Vector3 GetMovementVector()
+        protected override void Update()
         {
-            Vector3 movementVector = Vector3.zero;
+            base.Update();
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetButton(fireButtonName))
             {
-                movementVector += Vector3.left;
+                Shoot();
             }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                movementVector += Vector3.right;
-            }
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                movementVector += Vector3.up;
-            }
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                movementVector += Vector3.down;
-            }
+        }
 
-            return movementVector;
+        private Vector3 GetInputVector()
+        {           
+            float horizontalInput = Input.GetAxis(horizontalAxis);
+            float verticalInput = Input.GetAxis(verticalAxis);
+            
+            return new Vector3(horizontalInput, verticalInput, 0);
         }
     }
 }
