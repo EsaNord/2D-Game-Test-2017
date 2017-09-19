@@ -9,7 +9,6 @@ namespace SpaceShooter
     {
         [SerializeField]
         private int damage;
-
         [SerializeField]
         private float speed;
 

@@ -21,11 +21,12 @@ GameObject:
   - component: {fileID: 4652817902973666}
   - component: {fileID: 212545010650203172}
   - component: {fileID: 95938434663170284}
-  - component: {fileID: 114898344268896608}
   - component: {fileID: 58955685890146766}
+  - component: {fileID: 114898344268896608}
+  - component: {fileID: 114561934035735046}
   m_Layer: 9
   m_Name: EnemyUnit1
-  m_TagString: Untagged
+  m_TagString: Hostile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,6 +76,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114561934035735046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1337434362010890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ad2327b7e352c41b16ff4dfa67f575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _StartingHealth: 100
+  _MinimumHealth: 0
+  _MaximumHealth: 100
 --- !u!114 &114898344268896608
 MonoBehaviour:
   m_ObjectHideFlags: 1
