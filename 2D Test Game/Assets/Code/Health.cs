@@ -13,23 +13,15 @@ namespace SpaceShooter
         private int _MinimumHealth = 0;
         [SerializeField]
         private int _MaximumHealth = 100;
+
+        public bool IsDead
+        {
+            get { return _StartingHealth <= _MinimumHealth; }
+        }
         
         // Update Method for testing
         public void Update()
         {
-            // Keypad + increase health
-            // works on enemy and player
-            if (Input.GetKeyDown(KeyCode.KeypadPlus))
-            {
-                IncreaseHealth(20);
-            }
-            // Keypad - decrease health
-            // works on enemy and player
-            if (Input.GetKeyDown(KeyCode.KeypadMinus))
-            {
-                DecreaseHealth(20);
-            }
-
             Debug.Log(gameObject.name + " / " + CurrentHealth);
         }
 
@@ -50,8 +42,7 @@ namespace SpaceShooter
             // and gameobject is destroyed
             if (_StartingHealth <= _MinimumHealth)
             {
-                Debug.Log(gameObject.name + " / " + "DEAD");
-                Destroy(this.gameObject);
+                Debug.Log(gameObject.name + " / " + "DEAD");                
             }
         }
 

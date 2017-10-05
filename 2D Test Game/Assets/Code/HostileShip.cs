@@ -14,6 +14,20 @@ namespace SpaceShooter
         private GameObject[] _movementTargets;
         private int _currentMovementTargetIndex = 0;
 
+        public override Type UnitType
+        {
+            get
+            {
+                return Type.Hostile;
+            }
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            Shoot();            
+        }
+
         public Transform CurrentMovementTarget
         {
             get

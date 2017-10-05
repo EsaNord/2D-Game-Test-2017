@@ -13,6 +13,14 @@ namespace SpaceShooter
         public const string verticalAxis = "Vertical";
         public const string fireButtonName = "Fire1";
 
+        public override Type UnitType
+        {
+            get
+            {
+                return Type.Player;
+            }
+        }
+
         protected override void Move()
         {            
             Vector3 movementVector = GetInputVector();

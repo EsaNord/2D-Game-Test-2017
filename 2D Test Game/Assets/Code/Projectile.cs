@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceShooter
 {
-
+    [RequireComponent(typeof(Rigidbody2D))]
     public class Projectile : MonoBehaviour, IDamageProvider
     {
         [SerializeField]
@@ -15,10 +15,13 @@ namespace SpaceShooter
         private Rigidbody2D _RigidBody;
         private Vector2 _Direction;
         private bool _IsLaunched = false;
+        private Weapon _Weapon;
+        private AudioSource _Audio;        
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             _RigidBody = GetComponent<Rigidbody2D>();
+            _Audio = GetComponent<AudioSource>();
 
             if (_RigidBody == null)
             {
@@ -26,10 +29,12 @@ namespace SpaceShooter
             }
         }
 
-        public void Launch(Vector2 Direction)
+        public void Launch(Vector2 Direction, Weapon weapon)
         {
+            _Weapon = weapon;
             _Direction = Direction;
             _IsLaunched = true;
+            _Audio.PlayOneShot(_Audio.clip);
         }
 
         protected void FixedUpdate()
@@ -47,10 +52,24 @@ namespace SpaceShooter
             }
         }
 
+        protected void OnTriggerEnter2D(Collider2D other)
+        {
+            IDamageReceiver damageReceiver = other.GetComponent<IDamageReceiver>();
+            if (damageReceiver != null)
+            {
+                damageReceiver.TakeDamage(GetDamage());                
+            }
+            if (_Weapon.DisposePrjectile(this) == false)
+            {
+                Destroy(this.gameObject);
+                Debug.LogError("Error in disposing projectile");
+            }
+        }
+
         public int GetDamage()
         {
             return damage;
-        }
+        }        
         
     }
 }
