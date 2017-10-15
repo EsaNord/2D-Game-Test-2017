@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1898128347775346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalPosition: {x: -8.24, y: -4, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4014651354734924}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76af4ff3532763f4a8c96df51b80be3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _CoolDown: 0.25
+  _CoolDown: 0.15
   _ProjectilePrefab: {fileID: 114138074322516978, guid: 8d951d0de7e502640bebda923bef164c,
     type: 2}
 --- !u!114 &114558589669227628
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _PlayerLives: 3
 --- !u!114 &114648413149900814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ad2327b7e352c41b16ff4dfa67f575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _StartingHealth: 300
+  _StartingHealth: 10
   _MinimumHealth: 0
   _MaximumHealth: 400
 --- !u!212 &212659037864001276

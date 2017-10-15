@@ -8,7 +8,11 @@ namespace SpaceShooter
 
     public class PlayerSpaceship : SpaceShipBase
     {
-        
+        [SerializeField]
+        private int _PlayerLives = 3;
+
+        private bool _Died = false;
+
         public const string horizontalAxis = "Horizontal";
         public const string verticalAxis = "Vertical";
         public const string fireButtonName = "Fire1";
@@ -18,6 +22,27 @@ namespace SpaceShooter
             get
             {
                 return Type.Player;
+            }
+        }
+
+        public int Lives
+        {
+            get
+            {
+                return _PlayerLives;
+            }
+            
+        }
+
+        public bool Died
+        {
+            get
+            {
+                return _Died;
+            }
+            set
+            {
+                _Died = value;
             }
         }
 
@@ -34,6 +59,17 @@ namespace SpaceShooter
             if (Input.GetButton(fireButtonName))
             {
                 Shoot();
+            }
+        }
+
+        // Checks if player has still lives left.
+        protected override void Die()
+        {            
+            _Died = true;
+            _PlayerLives--;
+            if (_PlayerLives <= 0)
+            {
+                base.Die();
             }
         }
 
