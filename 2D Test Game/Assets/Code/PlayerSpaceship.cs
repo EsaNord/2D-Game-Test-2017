@@ -39,11 +39,7 @@ namespace SpaceShooter
             get
             {
                 return _Died;
-            }
-            set
-            {
-                _Died = value;
-            }
+            }            
         }
 
         protected override void Move()
@@ -61,16 +57,15 @@ namespace SpaceShooter
                 Shoot();
             }
         }
-
-        // Checks if player has still lives left.
+        
         protected override void Die()
-        {            
-            _Died = true;
-            _PlayerLives--;
-            if (_PlayerLives <= 0)
+        {
+            if (Health.IsDead)
             {
-                base.Die();
-            }
+                Debug.Log("Player Died");
+                _Died = true;
+                Destroy(this.gameObject);
+            }            
         }
 
         private Vector3 GetInputVector()

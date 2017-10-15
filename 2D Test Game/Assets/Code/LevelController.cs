@@ -31,7 +31,8 @@ namespace SpaceShooter
         private string _LevelName;
 
         private PlayerSpaceship _PlayerShip;
-        private GameObject _PlayerObject;        
+        private GameObject _PlayerObject;
+        private int _PlayerLives;
         private int _Hostiles;
         private float _CountDown;
         private bool _JustSpawned;
@@ -76,7 +77,8 @@ namespace SpaceShooter
             if (_PlayerShip.Died)
             {
                 if (_PlayerShip.Lives > 0)
-                {                   
+                {
+                    _PlayerLives--;
                     Respawn();
                 }
                 else
@@ -158,7 +160,8 @@ namespace SpaceShooter
             GameObject spawnPlayer = _PlayerSpawner.Spawn();
             PlayerSpaceship playerShip = spawnPlayer.GetComponent<PlayerSpaceship>();            
             _PlayerShip = playerShip;
-            _PlayerObject = spawnPlayer;            
+            _PlayerObject = spawnPlayer;
+            _PlayerLives = _PlayerShip.Lives;
             Debug.Log("Spawned");
         }
 
@@ -166,10 +169,11 @@ namespace SpaceShooter
         // Also sets players died parameter to false.
         public void Respawn()
         {
-            _PlayerObject.transform.position = new Vector3(_PlayerSpawner.transform.position.x,
-                _PlayerSpawner.transform.position.y, _PlayerSpawner.transform.position.z);
-            _JustSpawned = true;
-            _PlayerShip.Died = false;
+            GameObject spawnPlayer = _PlayerSpawner.Spawn();
+            PlayerSpaceship playerShip = spawnPlayer.GetComponent<PlayerSpaceship>();
+            _PlayerShip = playerShip;
+            _PlayerObject = spawnPlayer;
+            _JustSpawned = true;            
             Debug.Log("Respawned");
         }
 
