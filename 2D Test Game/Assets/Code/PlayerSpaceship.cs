@@ -9,9 +9,7 @@ namespace SpaceShooter
     public class PlayerSpaceship : SpaceShipBase
     {
         [SerializeField]
-        private int _PlayerLives = 3;
-        [SerializeField]
-        private LevelController _lc;
+        private int _PlayerLives = 3;        
         [SerializeField]
         private Weapon _bWeapon1;
         [SerializeField]
@@ -19,15 +17,17 @@ namespace SpaceShooter
 
         private bool _Died = false;
         private bool _boosterActive = false;
+        private float _boosterTime;
 
         public const string horizontalAxis = "Horizontal";
         public const string verticalAxis = "Vertical";
         public const string fireButtonName = "Fire1";
         
-        // Searches LevelCotroller so that booster time can be changed.
-        private void Start()
+        // Booster time get and set.
+        public float PowerUpTime
         {
-            _lc = FindObjectOfType<LevelController>().GetComponent<LevelController>();
+            get { return _boosterTime; }
+            set { _boosterTime = value; }
         }
 
         // Booster set and get.
@@ -74,8 +74,7 @@ namespace SpaceShooter
             if (Input.GetButton(fireButtonName))
             {
                 Shoot();
-            }
-            Debug.Log("levelc: " + _lc);
+            }            
             Debug.Log("BStatus: " + _boosterActive);
         }
 
@@ -126,7 +125,7 @@ namespace SpaceShooter
                     Debug.Log("Collected Weapon power up");
                     WeaponPowerUp hit = collision.gameObject.GetComponent<WeaponPowerUp>();
                     hit.Collected = true;
-                    _lc.BoostTime = hit.BoosterTime;                    
+                    _boosterTime += hit.BoosterTime;                    
                     _boosterActive = true;
                 }
                 else if (collision.gameObject.tag == "HealthPowerUp")

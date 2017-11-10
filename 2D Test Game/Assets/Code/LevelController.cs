@@ -101,6 +101,7 @@ namespace SpaceShooter
         // Timer for weapon booster.
         private void BoosterTimer()
         {
+            _boosterTime = _PlayerShip.PowerUpTime;
             if (_boosterTime > 0)
             {
                 _boosterTime -= Time.deltaTime;                
@@ -112,6 +113,7 @@ namespace SpaceShooter
                 Debug.Log("Boosters deactivated");
             }
             Debug.Log("Time Remaining" + _boosterTime);
+            _PlayerShip.PowerUpTime = _boosterTime;
             _displayTime = (int)_boosterTime;
         }
 

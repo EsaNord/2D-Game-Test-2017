@@ -207,7 +207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _PlayerLives: 3
-  _lc: {fileID: 114180969017294390, guid: 2d40e47b6f352ca4097cef2515809beb, type: 2}
   _bWeapon1: {fileID: 114989464005746258}
   _bWeapon2: {fileID: 114368566056777204}
 --- !u!114 &114648413149900814
