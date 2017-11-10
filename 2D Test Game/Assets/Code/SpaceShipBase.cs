@@ -40,7 +40,10 @@ namespace SpaceShooter
         {
             foreach (Weapon weapon in Weapons)
             {
-                weapon.Shoot();
+                if (weapon.gameObject.activeInHierarchy)
+                {
+                    weapon.Shoot();
+                }
             }
         }
 
@@ -71,7 +74,10 @@ namespace SpaceShooter
         public void TakeDamage(int amount)
         {
             Health.DecreaseHealth(amount);
-            Die();
+            if (Health.IsDead)
+            {
+                Die();
+            }
         }
 
         protected virtual void Die()

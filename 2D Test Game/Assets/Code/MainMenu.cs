@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using SpaceShooter.States;
 
 namespace SpaceShooter
 {
     public class MainMenu : MonoBehaviour
     {
         [SerializeField]
-        private string _LevelName;
+        private GameStateType _nextState;
         
         public void StartGame()
         {
-            SceneManager.LoadScene(_LevelName);
+            GameStateController.PerformTransition(_nextState);
         }
 
         public void QuitGame()

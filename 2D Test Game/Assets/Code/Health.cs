@@ -22,7 +22,7 @@ namespace SpaceShooter
         // Update Method for testing
         public void Update()
         {
-            Debug.Log(gameObject.name + " / " + CurrentHealth);
+            //Debug.Log(gameObject.name + " / " + CurrentHealth);
         }
 
         // Objects current health
@@ -42,7 +42,7 @@ namespace SpaceShooter
             // and gameobject is destroyed
             if (_StartingHealth <= _MinimumHealth)
             {
-                Debug.Log(gameObject.name + " / " + "DEAD");                
+                //Debug.Log(gameObject.name + " / " + "DEAD");                
             }
         }
 

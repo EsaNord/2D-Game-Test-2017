@@ -10,12 +10,32 @@ namespace SpaceShooter
     {
         [SerializeField]
         private int _PlayerLives = 3;
+        [SerializeField]
+        private LevelController _lc;
+        [SerializeField]
+        private Weapon _bWeapon1;
+        [SerializeField]
+        private Weapon _bWeapon2;
 
         private bool _Died = false;
+        private bool _boosterActive = false;
 
         public const string horizontalAxis = "Horizontal";
         public const string verticalAxis = "Vertical";
         public const string fireButtonName = "Fire1";
+        
+        // Searches LevelCotroller so that booster time can be changed.
+        private void Start()
+        {
+            _lc = FindObjectOfType<LevelController>().GetComponent<LevelController>();
+        }
+
+        // Booster set and get.
+        public bool Booster
+        {
+            get { return _boosterActive; }
+            set { _boosterActive = value; }
+        }
 
         public override Type UnitType
         {
@@ -30,8 +50,7 @@ namespace SpaceShooter
             get
             {
                 return _PlayerLives;
-            }
-            
+            }            
         }
 
         public bool Died
@@ -51,10 +70,28 @@ namespace SpaceShooter
         protected override void Update()
         {
             base.Update();
-
+            BoosterStatus();
             if (Input.GetButton(fireButtonName))
             {
                 Shoot();
+            }
+            Debug.Log("levelc: " + _lc);
+            Debug.Log("BStatus: " + _boosterActive);
+        }
+
+        // Activates extra weapons if weapon booster is collected.
+        // Else deactivates them.
+        private void BoosterStatus()
+        {
+            if (_boosterActive)
+            {
+                _bWeapon1.gameObject.SetActive(true);
+                _bWeapon2.gameObject.SetActive(true);
+            }
+            else
+            {
+                _bWeapon1.gameObject.SetActive(false);
+                _bWeapon2.gameObject.SetActive(false);
             }
         }
         
@@ -74,6 +111,33 @@ namespace SpaceShooter
             float verticalInput = Input.GetAxis(verticalAxis);
             
             return new Vector3(horizontalInput, verticalInput, 0);
+        }
+            
+        // Collision check for boosters.
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Debug.Log("Entered");            
+            if (collision.gameObject.tag != null)
+            {
+                Debug.Log("This hit: " + collision.gameObject.tag);
+                if (collision.gameObject.tag == "WeaponPowerUp")
+                {
+                    // If object is weapon booster.
+                    Debug.Log("Collected Weapon power up");
+                    WeaponPowerUp hit = collision.gameObject.GetComponent<WeaponPowerUp>();
+                    hit.Collected = true;
+                    _lc.BoostTime = hit.BoosterTime;                    
+                    _boosterActive = true;
+                }
+                else if (collision.gameObject.tag == "HealthPowerUp")
+                {
+                    // If object is health booster.
+                    Debug.Log("Collected Health power up");
+                    HealthPowerUp hit = collision.gameObject.GetComponent<HealthPowerUp>();
+                    Health.IncreaseHealth(hit.Healing);
+                    hit.Collected = true;
+                }
+            }
         }
     }
 }

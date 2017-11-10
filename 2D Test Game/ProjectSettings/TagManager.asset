@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hostile
+  - WeaponPowerUp
+  - HealthPowerUp
+  - LevelController
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - ProjectilePlayer
   - ProjectileHostile
   - Destroyer
-  - 
+  - PowerUp
   - 
   - 
   - 

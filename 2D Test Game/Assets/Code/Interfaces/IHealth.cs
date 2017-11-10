@@ -5,6 +5,6 @@ namespace SpaceShooter
 		int CurrentHealth { get; }
 		void IncreaseHealth( int amount );
 		void DecreaseHealth( int amount );
-        bool IsDead { get; }
+        bool IsDead { get; }        
 	}
 }

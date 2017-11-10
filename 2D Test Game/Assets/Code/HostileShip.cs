@@ -10,6 +10,8 @@ namespace SpaceShooter
 
         [SerializeField]
         private float _ReachDistance = 0.5f;
+        [SerializeField]
+        private int _score = 100;        
 
         private GameObject[] _movementTargets;
         private int _currentMovementTargetIndex = 0;
@@ -26,6 +28,17 @@ namespace SpaceShooter
         {
             base.Update();
             Shoot();            
+        }
+
+        protected override void Die()
+        {
+            
+            if (LevelController.Current != null)
+            {                
+                GameManager.Instance.IncreaseScore(_score);
+                LevelController.Current.HostileDestroyed(transform.position);
+            }
+            base.Die();
         }
 
         public Transform CurrentMovementTarget
